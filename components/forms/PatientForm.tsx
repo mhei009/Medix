@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../ui/CustomFormField";
 import SubmitButton from "../ui/SubmitButton";
+import { useState } from "react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -25,6 +26,8 @@ export const formSchema = z.object({
 });
 const PatientForm = () => {
   // 1. Define your form.
+const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -76,7 +79,7 @@ const PatientForm = () => {
           
         />
 
-        <SubmitButton isLoading={isLoading} />
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   );
