@@ -14,6 +14,7 @@ import { Control } from "react-hook-form";
 import Image from "next/image";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { E164Number } from 'libphonenumber-js'
 
 
 interface CustomProps {
