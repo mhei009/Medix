@@ -82,7 +82,7 @@ const PatientForm = () => {
           control={form.control}
           name="email"
           label="Email"
-          placeholder="JohnDoe@gmail.com"
+          placeholder="johndoe@gmail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="email"
         />
@@ -90,9 +90,9 @@ const PatientForm = () => {
         <CustomFormField
           fieldType={FormFieldType.PHONE_INPUT}
           control={form.control}
-          name="Mobile number"
-          label="Mobile Number"
-          placeholder="123-456-789 "
+          name="phone"
+          label="Phone number"
+          placeholder="(555) 123-4567"
           
         />
 

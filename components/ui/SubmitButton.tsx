@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import { Button } from "./Button";
+import { Button } from "@/components/ui/button";
 
 interface ButtonProps {
-  isLoading: boolean;
+  isLoading: boolean; 
   className?: string;
   children: React.ReactNode;
 }
