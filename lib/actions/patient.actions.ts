@@ -1,8 +1,8 @@
 'use server'
+
 import { ID, Query } from "node-appwrite"
 import { BUCKET_ID, DATABASE_ID, databases, ENDPOINT, PATIENT_COLLECTION_ID, PROJECT_ID, storage, users } from "../appwrite.config"
 import { parseStringify } from "../utils"
-
 import { InputFile } from "node-appwrite/file"
 
 export const createUser = async (user: CreateUserParams) => {
@@ -15,16 +15,17 @@ export const createUser = async (user: CreateUserParams) => {
       user.name
     )
     console.log({newUser})
-
+   
     return parseStringify(newUser)
   } catch (error: any) {
     if(error && error?.code === 409) {
       const documents = await users.list([
-        Query.equal("email", [user.email])
+        Query.equal('email', [user.email])
       ])
 
       return documents?.users[0]
     }
+    console.error("An error occurred while creating a new user:", error);
   }
 }
 
@@ -53,13 +54,12 @@ export const registerPatient = async ({ identificationDocument, ...patient }: Re
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile)
     }
 
-
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
       ID.unique(),
     {
-      identificationDocumentID: file?.$id || null,
+      identificationDocumentId: file?.$id || null,
       identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
       ...patient
     }
@@ -67,7 +67,7 @@ export const registerPatient = async ({ identificationDocument, ...patient }: Re
 
   return parseStringify(newPatient);
   } catch (error) {
-    console.log(error)
+    console.log("An error occurred while creating a new patient:", error);
     
   }
 

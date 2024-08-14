@@ -10,7 +10,7 @@ import { useState } from "react";
 import { PatientFormValidation, UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../ui/SubmitButton"
-import { createUser } from "@/lib/actions/patient.actions";
+import { createUser, registerPatient } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { GenderOptions, IdentificationTypes, PatientFormDefaultValues } from "@/constants";
@@ -19,6 +19,7 @@ import { SelectItem } from "../ui/select";
 import { Doctors } from "@/constants";
 import Image from "next/image";
 import FileUploader from "../FileUploader";
+
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
@@ -36,15 +37,33 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
 
-  async function onSubmit({ name, email, phone }: z.infer<typeof UserFormValidation>) {
+  async function onSubmit(values: z.infer<typeof PatientFormValidation>) {
     setIsLoading(true);
+ 
+let formData;
+
+if(values.identificationDocument && values.identificationDocument.length > 0) {
+  const blobFile = new Blob([values.identificationDocument[0]], {
+    type: values.identificationDocument[0].type,
+  });
+
+  formData = new FormData();
+  formData.append('blobFile', blobFile);
+  formData.append('fileName', values.identificationDocument[0].name); 
+}
 
     try{
-      const userData = { name, email, phone };
+       const patientData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        identificationDocument: formData,
+       }
+// @ts-ignore
+       const patient = await registerPatient(patientData);
 
-      const user = await createUser(userData);
-      
-      if(user) router.push(`/patients/${user.$id}/register`)
+       if(patient) router.push(`/patients/${user.$id}/new-appointment`);
+
     } catch(error){
       console.log(error)
     }
@@ -111,7 +130,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           fieldType={FormFieldType.SKELETON}
           control={form.control}
           name="gender"
-          label="Gender"
+          label="gender"
           renderSkeleton={(field) => (
             <FormControl>
                 <RadioGroup className="flex h-11 gap-6 xl:justify-between" 
@@ -126,11 +145,8 @@ const RegisterForm = ({ user }: { user: User }) => {
                       className="cursor-pointer">
                         {option}
                       </Label> 
-                    </div>
-                        
+                    </div>    
                   ))}
-               
-
                 </RadioGroup>
             </FormControl>
   )}
@@ -165,7 +181,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="emergencyContact"
+          name="emergencyContactName"
           label="Emergency Contact Name"
           placeholder="Guardian, Spouse, etc"
         />
@@ -247,14 +263,6 @@ const RegisterForm = ({ user }: { user: User }) => {
         />
             </div>
 
-
-            <section className=" space-y-6">
-          <div className="mb-9 space-y-1">
-          <h2 className= "sub-header text-dark-700">
-           Identification and Verification
-          </h2></div>
-          </section>
-
           <CustomFormField
           fieldType={FormFieldType.SELECT}
           control={form.control}
@@ -275,7 +283,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           fieldType={FormFieldType.INPUT}
           control={form.control}
           name="identificationNumber"
-          label="Identification Number"
+          label="Identification number"
           placeholder="123-456-789"
         />
 
@@ -284,7 +292,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           fieldType={FormFieldType.SKELETON}
           control={form.control}
           name="identificationDocument"
-          label="Scanned Identification Document"
+          label="Identification document"
           renderSkeleton={(field) => (
             <FormControl>
               <FileUploader files={field.value} onChange={field.onChange} />
@@ -292,12 +300,6 @@ const RegisterForm = ({ user }: { user: User }) => {
            
           )}
         />
-
-          
-          
-
-
-  
 
             <section className=" space-y-6">
           <div className="mb-9 space-y-1">
@@ -327,17 +329,12 @@ const RegisterForm = ({ user }: { user: User }) => {
           label="I consent to Privacy Policy"
           />
 
-         
-
-
-
         
-
           <div className="flex flex-col gap-6 xl:flex-row"></div>
 
   
        
-<SubmitButton isLoading={isLoading}>Register</SubmitButton>
+<SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   );
