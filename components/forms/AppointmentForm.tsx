@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../ui/CustomFormField";
 import { useState } from "react";
-import {  AppointmentFormValidation, getAppointmentSchema } from "@/lib/validation";
+import {  getAppointmentSchema } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../ui/SubmitButton"
 import { createUser } from "@/lib/actions/patient.actions";
