@@ -4,9 +4,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import StatCard from '@/components/ui/StatCard'
 import { getRecentAppointmentList } from '@/lib/actions/appointment.actions'
+import { DataTable } from '@/components/table/DataTable'
+import { columns, Payment } from '@/components/table/columns'
+
 
 const Admin = async () => {
-const appointments = await getRecentAppointmentList();
+    
+
+
+    const appointments = await getRecentAppointmentList();
 
   return ( 
     <div className='mx-auto flex max-w-7xl flex-col space-y-14'>
@@ -53,6 +59,8 @@ const appointments = await getRecentAppointmentList();
             />
             </section>
 
+            <DataTable columns={columns} data={appointments.documents} />
+            
         </main>
     </div>
   )
