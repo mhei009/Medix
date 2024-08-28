@@ -3,7 +3,7 @@ Welcome to Medix.
 A booking management system for Healthcare.
 
 
-##Tech Stack:
+Tech Stack:
     Appwrite an open-source backend-as-a-service (BaaS) platform
     Twilio for sms notifications.
     Typescript
