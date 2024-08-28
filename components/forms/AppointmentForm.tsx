@@ -42,7 +42,7 @@ console.log(appointment)
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
       primaryPhysician: appointment ? appointment.primaryPhysician : '',
-      schedule: appointment ? new Date(appointment.schedule) : new Date(),
+      schedule: appointment ? new Date(appointment?.schedule) : new Date(Date.now()),
       reason: appointment ? appointment.reason : '',
       note: appointment ? appointment.note : ' ',
       cancellationReason: appointment?.cancellationReason || ''
@@ -50,7 +50,7 @@ console.log(appointment)
   });
 
   async function onSubmit(values: z.infer<typeof AppointmentFormValidation>){
-    console.log('I AM SUBMITTING', {type})
+    
     setIsLoading(true);
 
     let status: Status;
@@ -104,7 +104,7 @@ console.log({type})
     }
     } catch (error) {
       console.error(error);
-      // Optionally, handle errors more gracefully here, like showing a notification to the user
+      
     }
 
     setIsLoading(false);
