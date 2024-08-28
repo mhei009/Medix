@@ -1,5 +1,9 @@
-Welcome to Medix. A booking management system for Healthcare.
-Tech Stack:
+##Welcome to Medix. 
+
+A booking management system for Healthcare.
+
+
+##Tech Stack:
     Appwrite an open-source backend-as-a-service (BaaS) platform
     Twilio for sms notifications.
     Typescript
@@ -7,7 +11,7 @@ Tech Stack:
     Shadcn for reusable components
     Sentry for tracking and testing. 
 
-About  
+##About  
 
 Medix allows patients to easily register, book, and manage their appointments with doctors, featuring administrative tools for scheduling, confirming, and canceling appointments.
 
