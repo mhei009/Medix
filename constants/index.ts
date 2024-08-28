@@ -18,7 +18,7 @@ export const PatientFormDefaultValues = {
   currentMedication: "",
   familyMedicalHistory: "",
   pastMedicalHistory: "",
-  identificationType: "Birth Certificate",
+  identificationType: "Passport",
   identificationNumber: "",
   identificationDocument: [],
   treatmentConsent: false,
@@ -27,17 +27,12 @@ export const PatientFormDefaultValues = {
 };
 
 export const IdentificationTypes = [
-  "Birth Certificate",
   "Driver's License",
-  "Medical Insurance Card/Policy",
-  "Military ID Card",
+  "Skatteverket ID",
   "National Identity Card",
   "Passport",
-  "Resident Alien Card (Green Card)",
   "Social Security Card",
-  "State ID Card",
-  "Student ID Card",
-  "Voter ID Card",
+  "Medical Insurance Card/Policy",
 ];
 
 export const Doctors = [
