@@ -29,7 +29,6 @@ export default async function NewAppointment({ params: { userId } }: SearchParam
               © 2024 Medix
             </p>
             
-        
         </div>
       </section>
       <Image
