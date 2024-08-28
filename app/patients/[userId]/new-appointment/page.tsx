@@ -36,7 +36,7 @@ export default async function NewAppointment({ params: { userId } }: SearchParam
         height={1000}
         width={1000}
         alt="onboardingdoctor"
-        className="side-img max-w[390px] bg-bottom"
+        className="side-img max-w-[390px] bg-bottom"
       />
     </div>
   );

@@ -12,7 +12,7 @@ const fontSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Medix",
-  description: "Healthcare management time system ",
+  description: "A booking time management system for healthcare",
 };
 
 export default function RootLayout({
