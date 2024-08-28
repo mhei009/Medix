@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../ui/CustomFormField";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { getAppointmentSchema } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import SubmitButton from "../ui/SubmitButton";
@@ -16,21 +16,21 @@ import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import { FormFieldType } from "./PatientForm";
 
-interface AppointmentFormProps {
-  userId: string;
-  patientId: string;
-  type: "create" | "cancel" | "schedule";
-  appointment?: Appointment;
-  setOpen: (open: boolean) => void;
-}
 
-const AppointmentForm = ({
+
+export const AppointmentForm = ({
   userId,
   patientId,
-  type,
+  type = "create",
   appointment,
   setOpen,
-}: AppointmentFormProps) => {
+}: {
+  userId: string;
+  patientId: string;
+  type: "create" | "schedule" | "cancel";
+  appointment?: Appointment;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 

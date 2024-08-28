@@ -1,11 +1,6 @@
 import AppointmentForm from "@/components/forms/AppointmentForm";
-import PatientForm from "@/components/forms/PatientForm";
-import { Button } from "@/components/ui/button";
 import { getPatient } from "@/lib/actions/patient.actions";
 import Image from "next/image";
-import Link from "next/link";
-
-
 import *  as Sentry from '@sentry/nextjs'
 
 
@@ -24,17 +19,16 @@ export default async function NewAppointment({ params: { userId } }: SearchParam
             alt="logo"
             className="mb-12 h-10 w-fit" 
           />
-          <AppointmentForm 
-          type="create"
-          userId={userId}
-          patientId={patient.$id}
+            <AppointmentForm
+            patientId={patient?.$id}
+            userId={userId}
+            type="create"
           />
           
             <p className="copyright mt-10 py-12">
               © 2024 Medix
             </p>
             
-        
         </div>
       </section>
       <Image
