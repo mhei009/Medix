@@ -37,7 +37,7 @@ export default function Home({searchParams}: SearchParamProps) {
         height={1000}
         width={1000}
         alt="onboardingdoctor"
-        className="side-img max-w[50%]"
+        className="side-img max-w-[50%]"
       />
     </div>
   );
