@@ -12,8 +12,7 @@ export const PatientFormDefaultValues = {
   emergencyContactName: "",
   emergencyContactNumber: "",
   primaryPhysician: "",
-  insuranceProvider: "",
-  insurancePolicyNumber: "",
+  
   allergies: "",
   currentMedication: "",
   familyMedicalHistory: "",
@@ -27,12 +26,12 @@ export const PatientFormDefaultValues = {
 };
 
 export const IdentificationTypes = [
+  
   "Driver's License",
-  "Skatteverket ID",
   "National Identity Card",
   "Passport",
   "Social Security Card",
-  "Medical Insurance Card/Policy",
+  
 ];
 
 export const Doctors = [
