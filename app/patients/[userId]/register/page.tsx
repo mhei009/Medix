@@ -2,12 +2,18 @@
  import Image from 'next/image'
 import Link from 'next/link'
 import RegisterForm from '@/components/forms/RegisterForm'
-import { getUser } from '@/lib/actions/patient.actions'
+import { getPatient, getUser } from '@/lib/actions/patient.actions'
 
 import *  as Sentry from '@sentry/nextjs'
+import { redirect } from 'next/navigation'
  
  const Register = async ({params : { userId }  }: SearchParamProps) => {
     const user = await getUser(userId)
+
+    const patient = await getPatient(userId);
+    if (patient) {
+      redirect(`/patients/${userId}/new-appointment`);
+    }
 
     Sentry.metrics.set("user_view_register", user.name);
 
